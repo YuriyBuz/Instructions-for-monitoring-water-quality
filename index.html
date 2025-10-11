@@ -76,10 +76,11 @@
         
         <!-- Tabs -->
         <div class="mb-6 border-b border-gray-200">
-            <nav class="flex flex-wrap -mb-px" aria-label="Tabs">
-                <button class="tab-btn active text-lg font-medium mr-2 sm:mr-4 py-3 px-4 border-b-2 rounded-t-lg" onclick="openTab(event, 'ph')">1. Вимірювання pH</button>
-                <button class="tab-btn text-lg font-medium mr-2 sm:mr-4 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'hardness')">2. Загальна жорсткість</button>
-                <button class="tab-btn text-lg font-medium py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'iron')">3. Вміст заліза</button>
+            <nav class="flex flex-col sm:flex-row sm:flex-wrap -mb-px" aria-label="Tabs">
+                <button class="tab-btn active text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg" onclick="openTab(event, 'ph')">1. Вимірювання pH</button>
+                <button class="tab-btn text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'hardness')">2. Загальна жорсткість</button>
+                <button class="tab-btn text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'iron')">3. Вміст заліза</button>
+                <button class="tab-btn text-lg font-medium text-left w-full sm:w-auto py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'another_test')">4. Ще якийсь тест</button>
             </nav>
         </div>
 
@@ -153,6 +154,14 @@
                 <p class="text-green-600">Стандарт для питної води після знезалізнення.</p>
             </div>
         </div>
+        
+        <div id="another_test" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Ще якийсь тест</h3>
+            <div class="text-center text-gray-500 bg-gray-50 p-8 rounded-lg">
+                <p>Інформація про цей тест буде додана пізніше.</p>
+            </div>
+        </div>
+
 
         <!-- Alert Section -->
         <div class="alert-card bg-red-50 p-6 rounded-xl mt-10">
@@ -179,7 +188,7 @@
 
             const tablinks = document.getElementsByClassName("tab-btn");
             const inactiveClasses = ['bg-lime-50', 'text-lime-700', 'border-transparent', 'hover:text-lime-900', 'hover:border-lime-400'];
-            const activeClasses = ['active']; // The rest is handled by CSS .tab-btn.active
+            const activeClasses = ['active']; 
             
             for (let i = 0; i < tablinks.length; i++) {
                 tablinks[i].classList.remove(...activeClasses);
