@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Інструкція: Контроль Якості Води на Станції ХВО</title>
+    
+    <!-- Вбудований маніфест для PWA -->
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22%D0%9A%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C%20%D0%AF%D0%BA%D0%BE%D1%81%D1%82%D1%96%20%D0%A5%D0%92%D0%9E%22%2C%22short_name%22%3A%22%D0%A5%D0%92%D0%9E%20%D0%A2%D0%B5%D1%81%D1%82%D0%B8%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f4f7f9%22%2C%22theme_color%22%3A%22%233b82f6%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzNiODJmNiI%2BPHBhdGggZD0iTTEyIDJDMi4yMjUgMiAxLjQxMiA0LjI5OCAzLjIzIDYuMTFsOC43NyA4Ljc3YzAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDBsOC43Ny04Ljc3QzIyLjU4OCA0LjI5OCAyMS43NzUgMiAxMiAyem0wIDIwQzYuNDc3IDIyIDIgMTcuNTIzIDIgMTJTMiAyMiAxMiAyMnptMC0yQzcuNTc0IDIwIDQgMTYuNDI2IDQgMTJTMjAgMjAgMTIgMjB6Ii8%2BPC9zdmc%2BIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XQ0KCX0=">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -13,9 +17,14 @@
         }
         .tab-content {
             display: none;
+            animation: fadeIn 0.3s ease-in-out;
         }
         .tab-content.active {
             display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         /* Active tab style (orange) */
         .tab-btn.active {
@@ -45,7 +54,7 @@
 </head>
 <body class="p-4 sm:p-6 md:p-8">
 
-    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-6 sm:p-8">
         <!-- Header -->
         <div class="text-center mb-8">
             <img src="https://foodline-production.com/wp-content/uploads/2021/10/3752781497_3752781497.webp" alt="Логотип Food Line Production" class="mx-auto mb-6 w-28">
@@ -68,7 +77,7 @@
                      <svg class="w-5 h-5 text-blue-600 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
                      <div>
                          <strong class="font-semibold text-gray-800">Обов'язок:</strong>
-                         <p class="text-gray-700">Результати замірів заносити в «Журнал контролю якості води».</p>
+                         <p class="text-gray-700">Результати замірів заносити в <strong class="text-blue-800">«Цифровий блокнот»</strong>.</p>
                      </div>
                 </li>
             </ul>
@@ -77,14 +86,15 @@
         <!-- Tabs -->
         <div class="mb-6 border-b border-gray-200">
             <nav class="flex flex-col sm:flex-row sm:flex-wrap -mb-px" aria-label="Tabs">
-                <button class="tab-btn active text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg" onclick="openTab(event, 'ph')">1. Вимірювання pH</button>
-                <button class="tab-btn text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'hardness')">2. Загальна жорсткість</button>
-                <button class="tab-btn text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'iron')">3. Вміст заліза</button>
-                <button class="tab-btn text-lg font-medium text-left w-full sm:w-auto py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'another_test')">4. Ще якийсь тест</button>
+                <button class="tab-btn active text-base sm:text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg" onclick="openTab(event, 'ph')">1. pH</button>
+                <button class="tab-btn text-base sm:text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'hardness')">2. Жорсткість</button>
+                <button class="tab-btn text-base sm:text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'iron')">3. Залізо</button>
+                <button class="tab-btn text-base sm:text-lg font-medium text-left w-full sm:w-auto mb-1 sm:mb-0 sm:mr-2 py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'manganese')">4. Марганець</button>
+                <button class="tab-btn text-base sm:text-lg font-medium text-left w-full sm:w-auto py-3 px-4 border-b-2 rounded-t-lg bg-lime-50 text-lime-700 border-transparent hover:text-lime-900 hover:border-lime-400" onclick="openTab(event, 'chlorine')">5. Хлор</button>
             </nav>
         </div>
 
-        <!-- Tab Content -->
+        <!-- Tab Content: pH -->
         <div id="ph" class="tab-content active">
             <h3 class="text-2xl font-bold text-gray-800 mb-4">Процедура вимірювання pH (електронний pH-метр)</h3>
             <div class="flex justify-center mb-6">
@@ -97,7 +107,7 @@
                     <li class="flex items-start"><div class="step-circle mr-4">2</div><span>Відберіть пробу води зі станції ХВО у чисту, суху ємність.</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">3</div><span>Занурте електрод у пробу води і злегка перемішайте.</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">4</div><span>Дочекайтеся стабілізації показників на дисплеї приладу.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Запишіть отримане значення у журнал.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Запишіть отримане значення у Цифровий блокнот.</span></li>
                 </ul>
             </div>
             <div class="norm-card bg-green-50 p-4 rounded-lg">
@@ -107,6 +117,7 @@
             </div>
         </div>
 
+        <!-- Tab Content: Hardness -->
         <div id="hardness" class="tab-content">
             <h3 class="text-2xl font-bold text-gray-800 mb-4">Вимірювання загальної жорсткості (тест Visocolor HE H 20 F)</h3>
             <div class="flex justify-center mb-6">
@@ -118,9 +129,9 @@
                     <li class="flex items-start"><div class="step-circle mr-4">1</div><span>Двічі промийте мірну пробірку водою, що аналізується.</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">2</div><span>Налийте у пробірку рівно <strong>20 мл</strong> води.</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">3</div><span>Додайте <strong>1 краплю</strong> реагенту «H-1» і перемішайте. Вода має стати червоною.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">4</div><span>По краплях додавайте реагент «H-2», <strong>рахуючи кожну краплю</strong>. Після кожної краплі збовтуйте пробу.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">4</div><span>По краплях додавайте реагенту «H-2», <strong>рахуючи кожну краплю</strong>. Після кожної краплі збовтуйте пробу.</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Рахуйте краплі, доки колір не зміниться з червоного на <strong>зелений</strong>.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">6</div><span><strong>Кількість крапель реагенту H-2 = Жорсткість в °dH</strong> (німецькі градуси). Запишіть результат.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">6</div><span><strong>Кількість крапель реагенту H-2 = Жорсткість в °dH</strong> (німецькі градуси). Запишіть результат у Цифровий блокнот.</span></li>
                 </ul>
             </div>
              <div class="norm-card bg-green-50 p-4 rounded-lg">
@@ -130,6 +141,7 @@
             </div>
         </div>
 
+        <!-- Tab Content: Iron -->
         <div id="iron" class="tab-content">
             <h3 class="text-2xl font-bold text-gray-800 mb-4">Вимірювання вмісту заліза (тест Visocolor ECO Eisen 1)</h3>
             <div class="flex justify-center mb-6">
@@ -142,10 +154,9 @@
                     <li class="flex items-start"><div class="step-circle mr-4">2</div><span>В одну склянку налийте <strong>5 мл</strong> води та поставте на позицію <strong>A</strong> у компараторі (це сліпа проба).</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">3</div><span>У другу склянку налийте <strong>5 мл</strong> води.</span></li>
                     <li class="flex items-start"><div class="step-circle mr-4">4</div><span>Додайте до другої склянки <strong>5 крапель</strong> реагенту «Fe-1», закрийте і перемішайте.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Додайте <strong>1 мірну ложку</strong> (без гірки) реагенту «Fe-2» (порошок), закрийте та збовтуйте до розчинення.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">6</div><span>Зачекайте рівно <strong>3 хвилини</strong> для розвитку забарвлення.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">7</div><span>Поставте другу склянку на позицію <strong>B</strong> у компараторі.</span></li>
-                    <li class="flex items-start"><div class="step-circle mr-4">8</div><span>Дивлячись зверху, зсувайте компаратор, доки кольори в обох отворах не збігатимуться. Зчитайте показник та запишіть результат (мг/л).</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Зачекайте рівно <strong>3 хвилини</strong> для розвитку забарвлення.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">6</div><span>Поставте другу склянку на позицію <strong>B</strong> у компараторі.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">7</div><span>Дивлячись зверху, зсувайте компаратор, доки кольори в обох отворах не збігатимуться. Зчитайте показник та запишіть результат у Цифровий блокнот.</span></li>
                 </ul>
             </div>
             <div class="norm-card bg-green-50 p-4 rounded-lg">
@@ -154,14 +165,59 @@
                 <p class="text-green-600">Стандарт для питної води після знезалізнення.</p>
             </div>
         </div>
-        
-        <div id="another_test" class="tab-content">
-            <h3 class="text-2xl font-bold text-gray-800 mb-4">Ще якийсь тест</h3>
-            <div class="text-center text-gray-500 bg-gray-50 p-8 rounded-lg">
-                <p>Інформація про цей тест буде додана пізніше.</p>
+
+        <!-- Tab Content: Manganese (NEW) -->
+        <div id="manganese" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Вимірювання вмісту марганцю (тест visocolor HE Mangan)</h3>
+            <div class="flex justify-center mb-6">
+                <img src="https://github.com/YuriyBuz/Instructions-for-monitoring-water-quality/blob/main/mangan.jpg?raw=true" alt="Тест на вміст марганцю MACHEREY-NAGEL Mangan" class="rounded-lg shadow-md max-w-sm w-full">
+            </div>
+            <div>
+                 <h4 class="text-lg font-semibold mb-3 text-gray-700">Покроковий процес (REF 920055):</h4>
+                 <ul class="space-y-4 mb-6">
+                    <li class="flex items-start"><div class="step-circle mr-4">1</div><span>Двічі промийте обидві мірні склянки компаратора водою, що аналізується.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">2</div><span>Наповніть обидві склянки пробою води до мітки <strong>20 мл</strong>.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">3</div><span>Одну склянку (сліпа проба) поставте у компаратор на позицію <strong>A</strong>.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">4</div><span>До другої склянки додайте необхідну кількість реагенту <strong>Mn-1</strong> (згідно з піктограмою в оригінальній інструкції), закрийте та перемішайте.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Додайте реагент <strong>Mn-2</strong>, закрийте кришкою та ретельно перемішайте.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">6</div><span>Поставте другу склянку в компаратор на позицію <strong>B</strong>.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">7</div><span>Порівняйте колір на кольоровому диску компаратора. Зчитайте значення (0.03 – 0.50 мг/л) та запишіть його у <strong>Цифровий блокнот</strong>.</span></li>
+                </ul>
+            </div>
+            <div class="norm-card bg-green-50 p-4 rounded-lg">
+                <h4 class="text-lg font-semibold text-green-800">Плановий показник</h4>
+                <p class="text-2xl font-bold text-green-700">≤ 0.05 мг/л</p>
+                <p class="text-green-600">Стандартна норма для питної води.</p>
             </div>
         </div>
 
+        <!-- Tab Content: Chlorine (NEW) -->
+        <div id="chlorine" class="tab-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Вимірювання вмісту хлору (тест visocolor ECO Chlor 2)</h3>
+            <div class="flex justify-center mb-6 space-x-4">
+                <img src="https://raw.githubusercontent.com/YuriyBuz/Instructions-for-monitoring-water-quality/refs/heads/main/Chlor1.jpg" alt="Тест на вміст хлору MACHEREY-NAGEL Chlor 2" class="rounded-lg shadow-md w-1/2 object-contain bg-gray-100">
+                <img src="https://github.com/YuriyBuz/Instructions-for-monitoring-water-quality/blob/main/Chlor2.jpg?raw=true" alt="Реагенти для тесту на хлор" class="rounded-lg shadow-md w-1/2 object-contain bg-gray-100">
+            </div>
+            <div>
+                 <h4 class="text-lg font-semibold mb-3 text-gray-700">Покроковий процес (REF 931015):</h4>
+                 <ul class="space-y-4 mb-6">
+                    <li class="flex items-start"><div class="step-circle mr-4">1</div><span>Двічі промийте обидві мірні склянки водою, що аналізується.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">2</div><span>За допомогою мірного шприца налийте рівно по <strong>5 мл</strong> води в обидві склянки.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">3</div><span>Одну склянку поставте на позицію <strong>A</strong> у компараторі (сліпа проба).</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">4</div><span>До другої склянки додайте <strong>3 краплі</strong> реагенту «Cl2-1».</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">5</div><span>Одразу додайте <strong>3 краплі</strong> реагенту «Cl2-2».</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">6</div><span>Закрийте кришкою та добре перемішайте. Забарвлення вказує на наявність <strong>вільного хлору</strong>.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">7</div><span>Поставте другу склянку на позицію <strong>B</strong> у компараторі. Дивлячись зверху, зсувайте шкалу до збігу кольорів.</span></li>
+                    <li class="flex items-start"><div class="step-circle mr-4">8</div><span>Зчитайте показник (0.1 – 2.0 мг/л) та запишіть результат у <strong>Цифровий блокнот</strong>.</span></li>
+                    <li class="flex items-start"><div class="text-xs text-gray-500 ml-12 mt-1"><em>Примітка: Для визначення загального хлору необхідно додатково використати реагент Cl2-3 згідно з інструкцією в коробці.</em></div></li>
+                </ul>
+            </div>
+            <div class="norm-card bg-green-50 p-4 rounded-lg">
+                <h4 class="text-lg font-semibold text-green-800">Плановий показник</h4>
+                <p class="text-2xl font-bold text-green-700">0.3 – 0.5 мг/л</p>
+                <p class="text-green-600">Оптимальний рівень залишкового вільного хлору (уточніть відповідно до ваших технологічних карт).</p>
+            </div>
+        </div>
 
         <!-- Alert Section -->
         <div class="alert-card bg-red-50 p-6 rounded-xl mt-10">
@@ -184,6 +240,7 @@
             const tabcontent = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
             }
 
             const tablinks = document.getElementsByClassName("tab-btn");
@@ -195,11 +252,23 @@
                 tablinks[i].classList.add(...inactiveClasses);
             }
 
-            document.getElementById(tabName).style.display = "block";
+            const activeContent = document.getElementById(tabName);
+            activeContent.style.display = "block";
+            // Невелика затримка для спрацьовування анімації
+            setTimeout(() => {
+                activeContent.classList.add("active");
+            }, 10);
+            
             evt.currentTarget.classList.add(...activeClasses);
             evt.currentTarget.classList.remove(...inactiveClasses);
+        }
+
+        // Реєстрація Service Worker для повноцінної роботи PWA (опціонально, але бажано)
+        if ('serviceWorker' in navigator) {
+            // Оскільки це єдиний файл, ми просто декларуємо, що він може бути PWA. 
+            // Для кешування офлайн зазвичай потрібен окремий файл sw.js
+            console.log("PWA маніфест завантажено.");
         }
     </script>
 </body>
 </html>
-
